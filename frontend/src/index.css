@@ -124,4 +124,9 @@
   button {
     @apply rounded-lg transition-all duration-200;
   }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
 }

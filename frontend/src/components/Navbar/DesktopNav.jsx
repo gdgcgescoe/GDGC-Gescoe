@@ -5,7 +5,7 @@ const DesktopNav = () => {
     return (
         <div className="sticky top-0 z-50">
             {/* Glassmorphism container with enhanced glass effect */}
-            <div className="backdrop-blur-lg backdrop-saturate-150 bg-background/80 border-b border-white/10 shadow-lg shadow-black/5">
+            <div className="backdrop-blur-lg backdrop-saturate-150 bg-background/40 border-b border-white/10 shadow-lg shadow-black/5">
                 <div className="max-w-7xl mx-auto px-8">
                     <div className="flex items-center justify-between h-16">
 
