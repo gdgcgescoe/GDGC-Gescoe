@@ -71,12 +71,12 @@ const MobileNav = () => {
     }, [isOpen])
 
     const navItems = [
-        { label: 'Home', href: '#home', isReady: true },
-        { label: 'About', isReady: false },
-        { label: 'Events', isReady: false },
-        { label: 'Team', isReady: false },
-        { label: 'Blogs', isReady: false },
-        { label: 'Contact', isReady: false },
+        { label: 'Home', href: '/', isReady: true },
+        { label: 'About', href: '/about', isReady: true },
+        { label: 'Events', href: '/events', isReady: true },
+        { label: 'Team', href: '/team', isReady: false },
+        { label: 'Blogs', href: '/blogs', isReady: false },
+        { label: 'Contact', href: '/contact', isReady: false },
     ]
 
     return (

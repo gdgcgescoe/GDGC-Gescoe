@@ -67,25 +67,28 @@ const HomePageMobile = () => {
                 <div className="mx-auto w-full max-w-md space-y-8">
 
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 rounded-full border border-gdg-blue/30 bg-gdg-blue/10 px-4 py-1.5 shadow-[0_0_10px_rgba(66,133,244,0.4)] self-start">
-                        <NumberTicker
-                            value={30}
-                            direction="up"
-                            className="text-xs font-semibold text-foreground"
-                        />
-                        <span className="text-gdg-blue/90 text-xs font-semibold">
-                            Active Members
-                        </span>
+                    <div className="flex justify-center">
+
+                        <div className="inline-flex items-center gap-2 rounded-full border border-gdg-blue/30 bg-gdg-blue/10 px-4 py-1.5 shadow-[0_0_10px_rgba(66,133,244,0.4)] ">
+                            <NumberTicker
+                                value={30}
+                                direction="up"
+                                className="text-xs font-semibold text-foreground"
+                            />
+                            <span className="text-gdg-blue/90 text-xs font-semibold">
+                                Active Members
+                            </span>
+                        </div>
                     </div>
 
                     {/* Heading */}
-                    <div className="space-y-1">
+                    <div className="flex flex-col items-center justify-center space-y-3 text-center">
                         <TextAnimate
                             animation="blurIn"
                             as="h1"
                             by="word"
                             once
-                            className="text-3xl font-bold italic tracking-tight"
+                            className="text-4xl font-bold italic tracking-tight"
                         >
                             Where Developers
                         </TextAnimate>
@@ -96,7 +99,7 @@ const HomePageMobile = () => {
                             by="word"
                             delay={0.2}
                             once
-                            className="text-3xl font-bold text-gdg-blue"
+                            className="text-4xl font-bold text-gdg-blue"
                         >
                             Begin To Build:
                         </TextAnimate>
@@ -107,14 +110,15 @@ const HomePageMobile = () => {
                             by="word"
                             delay={0.4}
                             once
-                            className="text-3xl font-bold italic tracking-tight"
+                            className="text-4xl font-bold italic tracking-tight"
                         >
                             GDG-GESCOE
                         </TextAnimate>
                     </div>
 
+
                     {/* Description */}
-                    <p className="text-sm text-foreground/60 leading-relaxed font-medium">
+                    <p className="text-sm text-foreground/60 leading-relaxed font-medium text-center">
                         Join a student-led developer community exploring real-world tech
                         through events, talks, and collaborative projects.
                     </p>

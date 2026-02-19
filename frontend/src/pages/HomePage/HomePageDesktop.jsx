@@ -27,7 +27,7 @@ const HomePageDesktop = () => {
                     <div className="flex-1 max-w-2xl space-y-10">
 
                         {/* Badge */}
-                        <div className="inline-flex items-center gap-2 rounded-full border border-gdg-blue/30 bg-gdg-blue/10 px-4 py-1.5 backdrop-blur-md shadow-[0_0_10px_rgba(66,133,244,0.5)] animate-pulse">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-gdg-blue/30 bg-gdg-blue/10 px-4 py-1.5 backdrop-blur-md shadow-(--shadow-gdg-blue-glow) animate-pulse">
                             <div className="flex items-center gap-2 font-semibold">
                                 <NumberTicker
                                     value={10}
@@ -85,13 +85,23 @@ const HomePageDesktop = () => {
 
                         {/* CTA Buttons */}
                         <div className="flex items-center gap-6 pt-2">
-                            <button className="rounded-xl border border-gdg-blue/40 bg-gdg-blue/5 px-8 py-3.5 text-sm font-semibold text-foreground/90 transition-all hover:bg-gdg-blue/10 hover:border-gdg-blue/60 focus:ring-2 focus:ring-gdg-blue/20">
+                            <a
+                                href="https://gdg.community.dev/gdg-on-campus-gokhale-education-societys-r-h-sapat-college-of-engineering-management-studies-and-research-nashik-india/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block rounded-xl border border-gdg-blue/40 bg-gdg-blue/5 px-8 py-3.5 text-sm font-semibold text-foreground/90 transition-all hover:bg-gdg-blue/10 hover:border-gdg-blue/60 focus:ring-2 focus:ring-gdg-blue/20"
+                            >
                                 Join Community
-                            </button>
+                            </a>
 
-                            <button className="rounded-xl border border-white/10 bg-white/5 px-8 py-3.5 text-sm font-semibold text-foreground/90 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20">
+
+                            <a
+                                href="/events"
+                                className="inline-block rounded-xl border border-white/10 bg-white/5 px-8 py-3.5 text-sm font-semibold text-foreground/90 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20"
+                            >
                                 Upcoming Events
-                            </button>
+                            </a>
+
                         </div>
 
                         {/* Stats */}
@@ -147,16 +157,12 @@ const HomePageDesktop = () => {
                     <img
                         src={scrollDown}
                         alt="Scroll Down"
-                        className="relative w-16 h-16 opacity-80 hover:opacity-100 transition-all duration-300 animate-bounce hover:scale-110 cursor-pointer"
-                        style={{
-                            animationDuration: '2s',
-                            filter: 'drop-shadow(0 4px 12px rgba(66, 133, 244, 0.3))'
-                        }}
+                        className="relative w-16 h-16 opacity-80 hover:opacity-100 transition-all duration-300 animate-bounce hover:scale-110 cursor-pointer animation-duration-[2s] filter-[drop-shadow(var(--shadow-gdg-blue-soft))]"
                     />
                 </div>
 
 
-                <section className="py-28">
+                <section className="py-18">
                     <div className="mx-auto w-full max-w-7xl px-8 lg:px-12">
 
                         {/* Heading */}
@@ -177,7 +183,7 @@ const HomePageDesktop = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
 
                             {/* Learn */}
-                            <div className="group relative rounded-[var(--radius-xl)] border border-white/10 bg-white/5 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gdg-green/20 hover:border-gdg-green/40 hover:bg-white/10 overflow-hidden">
+                            <div className="group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gdg-green/20 hover:border-gdg-green/40 hover:bg-white/10 overflow-hidden">
                                 {/* Animated gradient background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-gdg-green/10 via-gdg-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -190,7 +196,7 @@ const HomePageDesktop = () => {
                                     <img src={learnIcon} alt="Learn Icon" className="relative w-10 h-10 drop-shadow-lg" />
                                 </div>
 
-                                <h3 className="relative text-2xl font-bold mb-6 tracking-tight text-gdg-green drop-shadow-[0_2px_10px_rgba(52,168,83,0.3)] group-hover:drop-shadow-[0_2px_15px_rgba(52,168,83,0.5)] transition-all duration-300">
+                                <h3 className="relative text-2xl font-bold mb-6 tracking-tight text-gdg-green drop-shadow-(--drop-shadow-gdg-green) group-hover:drop-shadow-(--drop-shadow-gdg-green-hover) transition-all duration-300">
                                     Learn
                                 </h3>
                                 <p className="relative text-sm text-foreground/70 leading-relaxed font-medium group-hover:text-foreground/90 transition-colors duration-300">
@@ -206,7 +212,7 @@ const HomePageDesktop = () => {
                             </div>
 
                             {/* Build */}
-                            <div className="group relative rounded-[var(--radius-xl)] border border-white/10 bg-white/5 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gdg-yellow/20 hover:border-gdg-yellow/40 hover:bg-white/10 overflow-hidden">
+                            <div className="group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gdg-yellow/20 hover:border-gdg-yellow/40 hover:bg-white/10 overflow-hidden">
                                 {/* Animated gradient background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-gdg-yellow/10 via-gdg-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -219,7 +225,7 @@ const HomePageDesktop = () => {
                                     <img src={buildIcon} alt="Build Icon" className="relative w-10 h-10 drop-shadow-lg" />
                                 </div>
 
-                                <h3 className="relative text-2xl font-bold mb-6 tracking-tight text-gdg-yellow drop-shadow-[0_2px_10px_rgba(249,171,0,0.3)] group-hover:drop-shadow-[0_2px_15px_rgba(249,171,0,0.5)] transition-all duration-300">
+                                <h3 className="relative text-2xl font-bold mb-6 tracking-tight text-gdg-yellow drop-shadow-(--drop-shadow-gdg-yellow) group-hover:drop-shadow-(--drop-shadow-gdg-yellow-hover) transition-all duration-300">
                                     Build
                                 </h3>
                                 <p className="relative text-sm text-foreground/70 leading-relaxed font-medium group-hover:text-foreground/90 transition-colors duration-300">
@@ -235,7 +241,7 @@ const HomePageDesktop = () => {
                             </div>
 
                             {/* Connect */}
-                            <div className="group relative rounded-[var(--radius-xl)] border border-white/10 bg-white/5 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gdg-red/20 hover:border-gdg-red/40 hover:bg-white/10 overflow-hidden">
+                            <div className="group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gdg-red/20 hover:border-gdg-red/40 hover:bg-white/10 overflow-hidden">
                                 {/* Animated gradient background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-gdg-red/10 via-gdg-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -248,7 +254,7 @@ const HomePageDesktop = () => {
                                     <img src={connectIcon} alt="Connect Icon" className="relative w-10 h-10 drop-shadow-lg" />
                                 </div>
 
-                                <h3 className="relative text-2xl font-bold mb-6 tracking-tight text-gdg-red drop-shadow-[0_2px_10px_rgba(234,67,53,0.3)] group-hover:drop-shadow-[0_2px_15px_rgba(234,67,53,0.5)] transition-all duration-300">
+                                <h3 className="relative text-2xl font-bold mb-6 tracking-tight text-gdg-red drop-shadow-(--drop-shadow-gdg-red) group-hover:drop-shadow-(--drop-shadow-gdg-red-hover) transition-all duration-300">
                                     Connect
                                 </h3>
                                 <p className="relative text-sm text-foreground/70 leading-relaxed font-medium group-hover:text-foreground/90 transition-colors duration-300">

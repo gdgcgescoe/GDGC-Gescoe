@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import Footer from "@/components/footer/Footer";
 const HomePageDesktop = lazy(() => import("./HomePageDesktop"));
 const HomePageMobile = lazy(() => import("./HomePageMobile"));
 
@@ -13,6 +14,7 @@ export const HomePage = () => {
             <Suspense fallback={<div className="min-h-screen bg-background" />}>
                 <HomePageMobile />
             </Suspense>
+            <Footer/>
         </div>
     );
 };

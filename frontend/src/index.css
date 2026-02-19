@@ -95,6 +95,16 @@
   --color-gdg-green: var(--gdg-green);
   --color-gdg-yellow: var(--gdg-yellow);
   --color-gdg-red: var(--gdg-red);
+
+  /* Shadow utilities using design tokens */
+  --shadow-gdg-blue-glow: 0 0 10px color-mix(in srgb, var(--gdg-blue) 50%, transparent);
+  --shadow-gdg-blue-soft: 0 4px 12px color-mix(in srgb, var(--gdg-blue) 30%, transparent);
+  --drop-shadow-gdg-green: 0 2px 10px color-mix(in srgb, var(--gdg-green) 30%, transparent);
+  --drop-shadow-gdg-green-hover: 0 2px 15px color-mix(in srgb, var(--gdg-green) 50%, transparent);
+  --drop-shadow-gdg-yellow: 0 2px 10px color-mix(in srgb, var(--gdg-yellow) 30%, transparent);
+  --drop-shadow-gdg-yellow-hover: 0 2px 15px color-mix(in srgb, var(--gdg-yellow) 50%, transparent);
+  --drop-shadow-gdg-red: 0 2px 10px color-mix(in srgb, var(--gdg-red) 30%, transparent);
+  --drop-shadow-gdg-red-hover: 0 2px 15px color-mix(in srgb, var(--gdg-red) 50%, transparent);
 }
 
 /* Base Styles */
