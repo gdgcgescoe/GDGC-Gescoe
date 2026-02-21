@@ -80,7 +80,7 @@ const DesktopEvents = () => {
                     by="word"
                     delay={0.8}
                     once
-                    className="max-w-2xl text-lg lg:text-xl font-medium text-foreground/50 leading-relaxed mb-16"
+                    className="max-w-2xl text-lg lg:text-xl font-medium text-muted-foreground/60 leading-relaxed mb-16"
                 >
                     Join Us To Learn, Share, And Connect. From Technical Deep-Dives To
                     Casual Meetups, Find Your Next Developer Experience Here.

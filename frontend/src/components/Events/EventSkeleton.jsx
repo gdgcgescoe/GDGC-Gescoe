@@ -14,9 +14,9 @@ const EventSkeleton = () => {
             {[1, 2, 3].map((item) => (
                 <div
                     key={item}
-                    className="w-[300px] h-[450px] rounded-2xl bg-white/[0.03] border border-white/10 overflow-hidden animate-pulse"
+                    className="w-75 h-112.5 rounded-2xl bg-white/3 border border-white/10 overflow-hidden animate-pulse"
                 >
-                    <div className="h-[180px] bg-white/5" />
+                    <div className="h-45 bg-white/5" />
                     <div className="p-6 space-y-4">
                         <div className="h-6 w-3/4 bg-white/5 rounded" />
                         <div className="space-y-2">

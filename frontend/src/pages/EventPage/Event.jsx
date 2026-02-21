@@ -4,7 +4,7 @@ import Footer from "@/components/footer/Footer";
 
 
 const DesktopEvents = lazy(() => import("./DesktopEvents"));
-// const MobileEvents = lazy(() => import("./MobileEvents"));
+const MobileEvents = lazy(() => import("./MobileEvent"));
 
 const Event = () => {
     return (
@@ -13,9 +13,9 @@ const Event = () => {
             <Suspense fallback={<div className="min-h-screen bg-background" />}>
                 <DesktopEvents />
             </Suspense>
-            {/* <Suspense fallback={<div className="min-h-screen bg-background" />}>
+            <Suspense fallback={<div className="min-h-screen bg-background" />}>
                 <MobileEvents />
-            </Suspense> */}
+            </Suspense>
             <Footer />
         </div>
     );

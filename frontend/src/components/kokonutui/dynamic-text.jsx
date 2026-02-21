@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const DynamicText = ({
-  items = ["Hello", "नमस्ते", "नमस्कार", "Bonjour", "Hola", "Ciao"],
+  items = ["Hello", "नमस्ते", "नमस्कार","こんにちは"],
   onCycleComplete,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,7 +14,7 @@ const DynamicText = ({
       } else {
         setCurrentIndex((prev) => prev + 1);
       }
-    }, 800);
+    }, 700);
 
     return () => clearTimeout(timeout);
   }, [currentIndex, items.length, onCycleComplete]);
@@ -38,7 +38,7 @@ const DynamicText = ({
             animate="visible"
             exit="exit"
             variants={textVariants}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             className="absolute font-extrabold text-3xl text-white whitespace-nowrap"
           >
             {items[currentIndex]}
