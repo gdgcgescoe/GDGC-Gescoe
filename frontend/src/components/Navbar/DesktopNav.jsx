@@ -1,9 +1,9 @@
 import React from 'react'
 import mainLogo from '../../assets/gdg-gescoe-logos/short-dark-.png'
-
+import newLogo from '../../assets/gdg-gescoe-logos/mainwithoutLogo.png'
 const DesktopNav = () => {
     return (
-        <div className="sticky top-0 z-50">
+        <div className="w-full">
             {/* Glassmorphism container with enhanced glass effect */}
             <div className="backdrop-blur-lg backdrop-saturate-150 bg-background/40 border-b border-border/10 shadow-lg shadow-black/5">
                 <div className="max-w-7xl mx-auto px-8">
@@ -13,7 +13,7 @@ const DesktopNav = () => {
                         <div className="flex items-center gap-2.5 cursor-pointer group">
                             <div className="relative">
                                 <img
-                                    src={mainLogo}
+                                    src={newLogo}
                                     alt="GDG GESCOE Logo"
                                     className="h-10 w-auto object-contain transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(66,133,244,0.5)]"
                                 />

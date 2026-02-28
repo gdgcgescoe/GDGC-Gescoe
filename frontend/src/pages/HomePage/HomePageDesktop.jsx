@@ -30,7 +30,7 @@ const HomePageDesktop = () => {
                         <div className="inline-flex items-center gap-2 rounded-full border border-gdg-blue/30 bg-gdg-blue/10 px-4 py-1.5 backdrop-blur-md shadow-(--shadow-gdg-blue-glow) animate-pulse">
                             <div className="flex items-center gap-2 font-semibold">
                                 <NumberTicker
-                                    value={10}
+                                    value={20}
                                     direction="up"
                                     start={50}
                                     className="text-foreground text-sm tracking-tight "

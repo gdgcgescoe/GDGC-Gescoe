@@ -74,15 +74,15 @@ const MobileNav = () => {
         { label: 'Home', href: '/', isReady: true },
         { label: 'About', href: '/about', isReady: true },
         { label: 'Events', href: '/events', isReady: true },
-        { label: 'Team', href: '/team', isReady: false },
-        { label: 'Blogs', href: '/blogs', isReady: false },
-        { label: 'Contact', href: '/contact', isReady: false },
+        { label: 'Team', href: '/team', isReady: true },
+        { label: 'Blogs', href: '/blogs', isReady: true },
+        { label: 'Contact', href: '/contact', isReady: true },
     ]
 
     return (
         <>
             {/* Header */}
-            <header className="sticky top-0 z-50 md:hidden bg-background/80 backdrop-blur-lg border-b border-border">
+            <header className="md:hidden bg-background/80 backdrop-blur-lg border-b border-border w-full">
                 <div className="px-4 flex items-center justify-between h-16">
                     <img
                         src={mainLogo}

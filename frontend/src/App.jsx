@@ -5,6 +5,7 @@ import { BeamsBackground } from "./components/ui/beams-background";
 import { HomePage } from "./pages/HomePage/HomePage";
 import About from "./pages/AboutPage/About";
 import Event from "./pages/EventPage/Event"
+import Team from "./pages/TeamPage/TeamPage"
 
 // Session key to track if homepage loader was already shown
 const HOMEPAGE_LOADER_KEY = "homepageLoaderShown";
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/events" element={<Event />} />
+            <Route path="/team" element={<Team />} />
           </Routes>
         </div>
       )}

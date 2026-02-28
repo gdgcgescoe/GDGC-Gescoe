@@ -60,7 +60,7 @@ const HomePageMobile = () => {
                 rel="preload"
                 as="image"
                 href={HOMEPAGE_CAROUSEL_IMAGES[0]}
-                fetchpriority="high"
+                fetchPriority="high"
             />
             {/*  HERO SECTION  */}
             <section className="flex flex-col py-12 px-6">
