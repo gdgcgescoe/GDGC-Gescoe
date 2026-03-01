@@ -23,9 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# Ignore AboutPage directory
-src/pages/AboutPage/
-
-# Ignore specific component files
-src/components/SectionHeader.jsx
-src/components/ValueCard.jsx
