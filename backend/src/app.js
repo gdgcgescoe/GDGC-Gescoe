@@ -3,6 +3,7 @@ import cors from "cors";
 
 import eventsRoutes from "./routes/events.routes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+import teamRoutes from "./routes/teamRoutes.js";
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
 /* ROUTES */
 
 app.use("/api/events", eventsRoutes);
-
+app.use("/api/team", teamRoutes);
 /* ERROR HANDLER — LAST */
 
 app.use(errorHandler);
