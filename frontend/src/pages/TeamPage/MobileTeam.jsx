@@ -1,29 +1,14 @@
 import React, { useState, useMemo } from 'react';
-import { Users, ChevronDown } from 'lucide-react';
+import { Users, ChevronDown, Loader2 } from 'lucide-react';
 import TeamSection from '../../components/Team/TeamSection';
-import rawMembers from '../../assets/memebers.json';
+import { useTeam } from './hooks/useTeam';
 
 const TEAM_CATEGORIES = ['All Team', 'Lead', 'Technical', 'Content', 'Design', 'Event Management', 'Outreach'];
 
 const MobileTeam = () => {
   const [activeTab, setActiveTab] = useState('All Team');
   const [tenure, setTenure] = useState('2025-26');
-
-  // Process JSON Data
-  const processedMembers = useMemo(() => {
-    return rawMembers.map((m, idx) => ({
-      id: `member-${idx}`,
-      name: m["Team Member"],
-      team: m["Team"],
-      designation: m["Designation"],
-      profilePicture: m["Profile Picture"] || null,
-      socials: {
-        linkedin: m["Linkedin URL"],
-        github: m["Github URL"],
-        portfolio: m["Portfolio"]
-      }
-    }));
-  }, []);
+  const { members: processedMembers, loading, error } = useTeam();
 
   // Filtering & Grouping Logic
   const filteredSections = useMemo(() => {
@@ -31,8 +16,8 @@ const MobileTeam = () => {
 
     // 1. GDG Lead & Faculty (Shown in 'All Team' or 'Lead')
     if (activeTab === 'All Team' || activeTab === 'Lead') {
-      const gdgLeads = processedMembers.filter(m => m.designation === "GDG-GESCOE ORGANIZER");
-      const faculty = processedMembers.filter(m => m.designation === "Faculty Guidance");
+      const gdgLeads = processedMembers.filter(m => m.designation && m.designation.toLowerCase().includes("organizer"));
+      const faculty = processedMembers.filter(m => m.designation && m.designation.toLowerCase().includes("faculty"));
 
       if (gdgLeads.length > 0) {
         sections.push({ title: "GDG-GESCOE", highlight: "ORGANIZER", members: gdgLeads });
@@ -44,7 +29,7 @@ const MobileTeam = () => {
 
     // 2. Team Leads (All Leads together, Shown in 'All Team' or 'Lead')
     if (activeTab === 'All Team' || activeTab === 'Lead') {
-      const allLeads = processedMembers.filter(m => m.designation.toLowerCase().includes('lead') && m.designation !== "GDG-GESCOE ORGANIZER");
+      const allLeads = processedMembers.filter(m => m.designation && m.designation.toLowerCase().includes('lead') && !m.designation.toLowerCase().includes("organizer"));
       if (allLeads.length > 0) {
         sections.push({ title: "TEAM", highlight: "LEADS", members: allLeads });
       }
@@ -52,11 +37,11 @@ const MobileTeam = () => {
 
     // 3. Specific Team Sections in strict order
     const DESIRED_TEAM_ORDER = [
-      "Technical",
-      "Content & Research",
-      "Design",
+      "Technical Team",
+      "Content and Research Team",
+      "Design Team",
       "Event Management",
-      "Outreach"
+      "Outreach Team"
     ];
 
     DESIRED_TEAM_ORDER.forEach(teamName => {
@@ -156,7 +141,12 @@ const MobileTeam = () => {
 
         {/* Team Sections Render */}
         <div className="w-full flex flex-col items-center mt-8 space-y-16">
-          {tenure === '2025-26' ? (
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-16">
+              <Loader2 className="w-8 h-8 text-gdg-blue animate-spin" />
+              <p className="mt-3 text-sm text-muted-foreground font-medium">Loading team…</p>
+            </div>
+          ) : tenure === '2025-26' ? (
             filteredSections.map((section, idx) => (
               <TeamSection
                 key={idx}

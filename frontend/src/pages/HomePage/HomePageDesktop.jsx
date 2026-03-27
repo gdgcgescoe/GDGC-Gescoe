@@ -7,15 +7,16 @@ import buildIcon from "@/assets/icons/BuildIcon.svg";
 import connectIcon from "@/assets/icons/connectIcon.svg";
 
 import ImageCarousel from "@/components/carousel/ImageCarousel";
+import { supabase } from "@/lib/supabaseClient";
 
 /*  STATIC DATA  */
 const HOMEPAGE_CAROUSEL_IMAGES = [
-    "https://cohgympziiswgdzkpzsm.supabase.co/storage/v1/object/public/Home-Carousel-Images/IMG-20250904-WA0006_MfP1yqp.webp?width=1400&quality=80",
-    "https://cohgympziiswgdzkpzsm.supabase.co/storage/v1/object/public/Home-Carousel-Images/IMG-20250904-WA0009_EDiLC5B.jpg?width=1400&quality=80",
-    "https://cohgympziiswgdzkpzsm.supabase.co/storage/v1/object/public/Home-Carousel-Images/IMG20251001110257-min_SlUJvW2.webp?width=1400&quality=80",
-    "https://cohgympziiswgdzkpzsm.supabase.co/storage/v1/object/public/Home-Carousel-Images/IMG_2681_eSUaKbN.jpeg?width=1400&quality=80",
-    "https://cohgympziiswgdzkpzsm.supabase.co/storage/v1/object/public/Home-Carousel-Images/WhatsApp%20Image%202025-10-08%20at%2010.06.06%20PM.jpeg?width=1400&quality=80",
-];
+  'home-page/IMG-20250904-WA0006_MfP1yqp.webp',
+  'home-page/IMG-20250904-WA0009_EDiLC5B.jpg.jpeg',
+  'home-page/IMG_2681_eSUaKbN.jpeg',
+  'home-page/IMG_3955.jpg',
+  'home-page/WhatsApp Image 2025-10-08 at 10.06.06 PM.jpeg'
+].map(path => supabase.storage.from('2026-events').getPublicUrl(path).data.publicUrl);
 
 const HomePageDesktop = () => {
     return (

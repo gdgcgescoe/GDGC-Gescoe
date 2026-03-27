@@ -1,4 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
+import { fetchAllEvents as apiFetchAllEvents } from '@/lib/api'
+
+// ── Fallback demo data (used when the backend is unreachable) ──────────
 
 const DEMO_EVENTS = [
   {
@@ -135,21 +138,50 @@ const DEMO_EVENTS = [
   }
 ]
 
+// ── Hook ───────────────────────────────────────────────────────────────
+
 export const useEvents = () => {
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    // Simulate API fetch
     const fetchEvents = async () => {
       try {
         setLoading(true)
-        // Simulate delay
-        await new Promise(resolve => setTimeout(resolve, 800))
-        setEvents(DEMO_EVENTS)
+        const res = await apiFetchAllEvents()
+        const rawEvents = Array.isArray(res) ? res : res.data ?? []
+        
+        const mappedEvents = rawEvents.map(ev => {
+            const dateObj = new Date(ev.start_ts);
+            return {
+                id: ev.id,
+                slug: ev.slug,
+                title: ev.title,
+                category: ev.category,
+                displayDate: {
+                    monthShort: dateObj.toLocaleString('default', { month: 'short' }).toUpperCase(),
+                    day: String(dateObj.getDate()).padStart(2, '0'),
+                    year: String(dateObj.getFullYear()),
+                },
+                time: ev.time_label,
+                venue: ev.venue,
+                shortDescription: ev.short_description || ev.shortDetail || '',
+                description: ev.description,
+                coverImage: ev.cover_image,
+                status: ev.status,
+                speakers: ev.speakers || [],
+                gallery: ev.gallery || [],
+                highlights: ev.highlights || [],
+                registrationLink: ev.registration_link,
+                learnMoreLink: ev.learn_more_link,
+                linkedinLink: ev.linkedin_link,
+            };
+        });
+        setEvents(mappedEvents)
       } catch (err) {
-        setError('Failed to fetch events. Please try again later.')
+        console.warn('Backend unreachable, using demo events:', err.message)
+        setEvents(DEMO_EVENTS)
       } finally {
         setLoading(false)
       }
