@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FaLinkedin, FaGithub, FaInstagram, FaDiscord, FaMedium } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
+import { FaLinkedin, FaGithub, FaInstagram, FaDiscord, FaMedium, FaYoutube } from 'react-icons/fa';
 import FooterLogo from '../../assets/gdg-gescoe-logos/FooterLogo.svg';
 
 const MobileFooter = () => {
@@ -9,18 +8,18 @@ const MobileFooter = () => {
 
   const socialLinks = [
     { name: 'LinkedIn', icon: FaLinkedin, url: 'https://linkedin.com/company/gdg-gescoe', ariaLabel: 'Visit our LinkedIn page' },
-    { name: 'GitHub', icon: FaGithub, url: 'https://github.com/gdg-gescoe', ariaLabel: 'Visit our GitHub profile' },
-    { name: 'Instagram', icon: FaInstagram, url: 'https://instagram.com/gdg_gescoe', ariaLabel: 'Visit our Instagram profile' },
-    { name: 'X', icon: FaXTwitter, url: 'https://x.com/gdg_gescoe', ariaLabel: 'Visit our X (Twitter) profile' },
-    { name: 'Discord', icon: FaDiscord, url: 'https://discord.gg/gdg-gescoe', ariaLabel: 'Join our Discord server' },
-    { name: 'Medium', icon: FaMedium, url: 'https://medium.com/@gdg-gescoe', ariaLabel: 'Read our Medium blog' }
+    { name: 'GitHub', icon: FaGithub, url: 'https://github.com/gdgcgescoe/', ariaLabel: 'Visit our GitHub profile' },
+    { name: 'Instagram', icon: FaInstagram, url: 'https://www.instagram.com/gdgc_gescoe', ariaLabel: 'Visit our Instagram profile' },
+    { name: 'YouTube', icon: FaYoutube, url: 'https://www.youtube.com/@gdgc-gescoe', ariaLabel: 'Visit our YouTube channel' },
+    { name: 'Discord', icon: FaDiscord, url: 'https://discord.com/invite/VTjvYZYkEJ', ariaLabel: 'Join our Discord server' },
+    { name: 'Medium', icon: FaMedium, url: 'https://medium.com/@gdgcgescoe', ariaLabel: 'Read our Medium blog' }
   ];
 
   const quickLinks = [
     { label: 'About GDG-GESCOE', href: '/about' },
     { label: 'Upcoming Events', href: '/events' },
     { label: 'Meet the Team', href: '/team' },
-    { label: 'Tech Blogs', href: '/blogs' }
+    // { label: 'Tech Blogs', href: '/blogs' }
   ];
 
   const supportLinks = [

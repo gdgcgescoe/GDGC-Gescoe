@@ -4,6 +4,7 @@ import mainLogo from '../../assets/gdg-gescoe-logos/short-dark-.png'
 const MobileNav = () => {
     const [isOpen, setIsOpen] = useState(false)
     const drawerRef = useRef(null)
+    const showBlogs = false
 
     const toggleMenu = useCallback(() => {
         setIsOpen(prev => !prev)
@@ -75,9 +76,11 @@ const MobileNav = () => {
         { label: 'About', href: '/about', isReady: true },
         { label: 'Events', href: '/events', isReady: true },
         { label: 'Team', href: '/team', isReady: true },
-        { label: 'Blogs', href: '/blogs', isReady: true },
+        { label: 'Blogs', href: '/blogs', isReady: true, isVisible: showBlogs },
         { label: 'Contact', href: '/contact', isReady: true },
     ]
+
+    const visibleNavItems = navItems.filter((item) => item.isVisible !== false)
 
     return (
         <>
@@ -127,7 +130,7 @@ const MobileNav = () => {
                 id="mobile-menu"
                 role="dialog"
                 aria-modal="true"
-                className={`fixed top-0 left-0 h-full w-80 max-w-[85vw] z-[60] bg-background border-r border-border transform transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed top-0 left-0 h-full w-80 max-w-[85vw] z-60 bg-background border-r border-border transform transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'
                     }`}
             >
                 <div className="h-16 flex items-center px-4 border-b border-border">
@@ -139,7 +142,7 @@ const MobileNav = () => {
                 </div>
 
                 <nav className="flex flex-col pt-2">
-                    {navItems.map((item, index) => (
+                    {visibleNavItems.map((item, index) => (
                         <div key={item.label}>
                             {item.isReady ? (
                                 <a
@@ -158,7 +161,7 @@ const MobileNav = () => {
                                 </button>
                             )}
 
-                            {index < navItems.length - 1 && (
+                            {index < visibleNavItems.length - 1 && (
                                 <div className="border-b border-border mx-6" />
                             )}
                         </div>

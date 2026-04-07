@@ -2,6 +2,8 @@ import React from 'react'
 import mainLogo from '../../assets/gdg-gescoe-logos/short-dark-.png'
 import newLogo from '../../assets/gdg-gescoe-logos/mainwithoutLogo.png'
 const DesktopNav = () => {
+    const showBlogs = false
+
     return (
         <div className="w-full">
             {/* Glassmorphism container with enhanced glass effect */}
@@ -47,13 +49,15 @@ const DesktopNav = () => {
                                     Events
                                     <span className="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                 </a>
-                                <a
-                                    href="/blogs"
-                                    className="relative text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm font-medium group"
-                                >
-                                    Blogs
-                                    <span className="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
-                                </a>
+                                {showBlogs && (
+                                    <a
+                                        href="/blogs"
+                                        className="relative text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm font-medium group"
+                                    >
+                                        Blogs
+                                        <span className="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
+                                    </a>
+                                )}
                                 <a
                                     href="/team"
                                     className="relative text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm font-medium group"
