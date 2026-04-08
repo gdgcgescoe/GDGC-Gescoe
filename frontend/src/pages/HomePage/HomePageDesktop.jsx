@@ -11,11 +11,11 @@ import { supabase } from "@/lib/supabaseClient";
 
 /*  STATIC DATA  */
 const HOMEPAGE_CAROUSEL_IMAGES = [
-  'home-page/IMG-20250904-WA0006_MfP1yqp.webp',
-  'home-page/IMG-20250904-WA0009_EDiLC5B.jpg.jpeg',
-  'home-page/IMG_2681_eSUaKbN.jpeg',
-  'home-page/IMG_3955.jpg',
-  'home-page/WhatsApp Image 2025-10-08 at 10.06.06 PM.jpeg'
+    'home-page/IMG-20250904-WA0006_MfP1yqp.webp',
+    'home-page/IMG-20250904-WA0009_EDiLC5B.jpg.jpeg',
+    'home-page/IMG_2681_eSUaKbN.jpeg',
+    'home-page/IMG_3955.jpg',
+    'home-page/WhatsApp Image 2025-10-08 at 10.06.06 PM.jpeg'
 ].map(path => supabase.storage.from('2026-events').getPublicUrl(path).data.publicUrl);
 
 const HomePageDesktop = () => {
@@ -30,12 +30,15 @@ const HomePageDesktop = () => {
                         {/* Badge */}
                         <div className="inline-flex items-center gap-2 rounded-full border border-gdg-blue/30 bg-gdg-blue/10 px-4 py-1.5 backdrop-blur-md shadow-(--shadow-gdg-blue-glow) animate-pulse">
                             <div className="flex items-center gap-2 font-semibold">
-                                <NumberTicker
-                                    value={20}
-                                    direction="up"
-                                    start={50}
-                                    className="text-foreground text-sm tracking-tight "
-                                />
+                                <div>
+                                    <NumberTicker
+                                        value={1000}
+                                        direction="up"
+                                        start={50}
+                                        className="text-foreground text-sm tracking-tight "
+                                    />
+                                    +
+                                </div>
                                 <span className="text-gdg-blue/90 text-sm tracking-tight">
                                     Active Members
                                 </span>
