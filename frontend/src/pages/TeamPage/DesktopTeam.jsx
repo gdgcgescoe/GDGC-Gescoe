@@ -10,19 +10,21 @@ const TEAM_CATEGORIES = ['All Team', 'Lead', 'Technical', 'Content', 'Design', '
 const DesktopTeam = () => {
     const [activeTab, setActiveTab] = useState('All Team');
     const [tenure, setTenure] = useState('2025-26');
-    const { members: processedMembers, loading, error } = useTeam();
+    const { members: processedMembers, teamOrder, loading, error } = useTeam();
 
     // Filtering & Grouping Logic
     const filteredSections = useMemo(() => {
         const sections = [];
 
-        // 1. GDG Lead & Faculty (Shown in 'All Team' or 'Lead')
+        // 1. GDG Organizer & Faculty (Shown in 'All Team' or 'Lead')
         if (activeTab === 'All Team' || activeTab === 'Lead') {
-            const gdgLeads = processedMembers.filter(m => m.designation && m.designation.toLowerCase().includes("organizer"));
-            const faculty = processedMembers.filter(m => m.designation && m.designation.toLowerCase().includes("faculty"));
+            const organizers = processedMembers.filter(m =>
+                m.designation && m.designation.toLowerCase().includes("organizer")
+            );
+            const faculty = processedMembers.filter(m => m.team === 'Faculty');
 
-            if (gdgLeads.length > 0) {
-                sections.push({ title: "GDG-GESCOE", highlight: "ORGANIZER", members: gdgLeads });
+            if (organizers.length > 0) {
+                sections.push({ title: "GDG-GESCOE", highlight: "ORGANIZER", members: organizers });
             }
             if (faculty.length > 0) {
                 sections.push({ title: "FACULTY", highlight: "GUIDANCE", members: faculty });
@@ -31,27 +33,32 @@ const DesktopTeam = () => {
 
         // 2. Team Leads (All Leads together, Shown in 'All Team' or 'Lead')
         if (activeTab === 'All Team' || activeTab === 'Lead') {
-            const allLeads = processedMembers.filter(m => m.designation && m.designation.toLowerCase().includes('lead') && !m.designation.toLowerCase().includes("organizer"));
+            const allLeads = processedMembers.filter(m =>
+                m.designation && m.designation.toLowerCase().includes('lead') &&
+                !m.designation.toLowerCase().includes("organizer") &&
+                m.team !== 'Faculty'
+            );
             if (allLeads.length > 0) {
                 sections.push({ title: "TEAM", highlight: "LEADS", members: allLeads });
             }
         }
 
-        // 3. Specific Team Sections in strict order
-        const DESIRED_TEAM_ORDER = [
-            "Technical Team",
-            "Content and Research Team",
-            "Design Team",
-            "Event Management",
-            "Outreach Team"
-        ];
+        // 3. Specific Team Sections — use dynamic teamOrder from the API
+        const teamsToRender = teamOrder.length > 0
+            ? teamOrder
+            : [
+                "Technical Team",
+                "Content and Research Team",
+                "Design Team",
+                "Event Management",
+                "Outreach"
+              ];
 
-        DESIRED_TEAM_ORDER.forEach(teamName => {
+        teamsToRender.forEach(teamName => {
             const isTabMatch = activeTab === 'All Team' ||
                 teamName.toLowerCase().includes(activeTab.toLowerCase());
 
             // Only add individual team sections if we are NOT on the 'Lead' tab alone
-            // (If we are on 'Lead', they are already shown in "TEAM LEADS")
             if (isTabMatch && activeTab !== 'Lead') {
                 const teamMembers = processedMembers.filter(m => m.team === teamName);
 
@@ -62,11 +69,14 @@ const DesktopTeam = () => {
                         const bIsLead = b.designation.toLowerCase().includes('lead');
                         if (aIsLead && !bIsLead) return -1;
                         if (!aIsLead && bIsLead) return 1;
-                        return 0; // Keep original order otherwise
+                        return (a.order ?? 999) - (b.order ?? 999);
                     });
 
+                    // Derive display title: strip trailing "Team" to avoid "TECHNICAL TEAM TEAM"
+                    const displayTitle = teamName.replace(/ team$/i, '').toUpperCase();
+
                     sections.push({
-                        title: teamName.toUpperCase(),
+                        title: displayTitle,
                         highlight: "TEAM",
                         members: sortedMembers
                     });
@@ -75,7 +85,7 @@ const DesktopTeam = () => {
         });
 
         return sections;
-    }, [activeTab, processedMembers]);
+    }, [activeTab, processedMembers, teamOrder]);
 
     return (
         <section className="relative w-full min-h-screen flex flex-col items-center pt-32 pb-40 px-8 text-center mt-10 overflow-hidden">

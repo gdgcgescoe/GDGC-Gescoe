@@ -21,27 +21,27 @@ function mapLocalMember(m, idx) {
 }
 
 /**
- * Maps a Supabase row (from the backend) to the same UI shape.
- * Adjust field names here if your Supabase view columns differ.
+ * Maps a member object (from organizer/teams) to the UI shape.
  */
-function mapApiMember(m, idx) {
+function mapMember(m, teamName) {
   return {
-    id: m.id ?? `api-member-${idx}`,
-    name: m.name ?? m['Team Member'] ?? '',
-    team: m.team ?? m['Team'] ?? '',
-    designation: m.designation ?? m['Designation'] ?? '',
-    profilePicture: m.profilePicture ?? m.profile_picture ?? m['Profile Picture'] ?? null,
+    id: m.id ?? crypto.randomUUID(),
+    name: m.name ?? '',
+    team: teamName,
+    designation: m.designation ?? m.roleType ?? '',
+    profilePicture: m.profilePicture ?? m.profile_picture ?? null,
     socials: {
-      linkedin: m.socials?.linkedin ?? m.linkedin ?? m.linkedin_url ?? m['Linkedin URL'] ?? null,
-      github: m.socials?.github ?? m.github ?? m.github_url ?? m['Github URL'] ?? null,
-      portfolio: m.socials?.portfolio ?? m.portfolio ?? m['Portfolio'] ?? null,
+      linkedin: m.socials?.linkedin ?? m.linkedin ?? null,
+      github: m.socials?.github ?? m.github ?? null,
+      portfolio: m.socials?.portfolio ?? m.portfolio ?? null,
     },
-    tenureLabel: m.tenureLabel || null
+    order: m.order ?? 999,
   }
 }
 
 export const useTeam = () => {
   const [members, setMembers] = useState([])
+  const [teamOrder, setTeamOrder] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -53,37 +53,82 @@ export const useTeam = () => {
 
         // The backend wraps results in { success, count, data }
         const rawList = Array.isArray(res) ? res : res.data ?? []
-        
-        let flatMembers = [];
+
+        let flatMembers = []
+        let orderedTeamNames = []
+
         rawList.forEach(tenure => {
-            // Process Organizers (GDG Leads, Faculty, etc.)
-            if (tenure.organizers) {
-                tenure.organizers.forEach(o => {
-                    flatMembers.push({ ...o, team: "Core", tenureLabel: tenure.label });
-                });
-            }
+          // --- Handle organizer field (singular array) ---
+          if (tenure.organizer && Array.isArray(tenure.organizer)) {
+            tenure.organizer.forEach(o => {
+              flatMembers.push(mapMember(o, 'Core'))
+            })
+          }
+          // Legacy: handle organizers (plural)
+          if (tenure.organizers && Array.isArray(tenure.organizers)) {
+            tenure.organizers.forEach(o => {
+              flatMembers.push(mapMember(o, 'Core'))
+            })
+          }
 
-            // Process Teams (Technical, Content, etc.)
-            if (tenure.teams) {
-                tenure.teams.forEach(t => {
-                    if (t.members) {
-                        t.members.forEach(m => {
-                            flatMembers.push({ ...m, team: t.name, tenureLabel: tenure.label });
-                        });
-                    }
-                });
-            } 
-            
-            // Fallback for simple flat lists
-            if (!tenure.organizers && !tenure.teams) {
-                flatMembers.push(tenure);
-            }
-        });
+          // --- Handle facultyGuidance field ---
+          if (tenure.facultyGuidance && Array.isArray(tenure.facultyGuidance)) {
+            tenure.facultyGuidance.forEach(f => {
+              flatMembers.push({
+                id: f.id ?? crypto.randomUUID(),
+                name: f.name ?? '',
+                team: 'Faculty',
+                designation: 'Faculty Advisor',
+                profilePicture: f.profilePicture ?? f.profile_picture ?? null,
+                socials: {
+                  linkedin: f.linkedin ?? f.socials?.linkedin ?? null,
+                  github: f.github ?? f.socials?.github ?? null,
+                  portfolio: null,
+                },
+                order: f.order ?? 999,
+              })
+            })
+          }
 
-        setMembers(flatMembers.map(mapApiMember))
+          // --- Handle teams field ---
+          if (tenure.teams && Array.isArray(tenure.teams)) {
+            // Sort teams by their order field
+            const sortedTeams = [...tenure.teams].sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
+
+            sortedTeams.forEach(t => {
+              // Collect the ordered team names for the UI
+              if (t.name && !orderedTeamNames.includes(t.name)) {
+                orderedTeamNames.push(t.name)
+              }
+
+              if (t.members && Array.isArray(t.members)) {
+                // Sort members by order
+                const sortedMembers = [...t.members].sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
+                sortedMembers.forEach(m => {
+                  flatMembers.push(mapMember(m, t.name))
+                })
+              }
+            })
+          }
+
+          // Fallback for flat lists (no organizer/teams structure)
+          if (!tenure.organizer && !tenure.organizers && !tenure.teams) {
+            flatMembers.push(mapMember(tenure, tenure.team ?? ''))
+          }
+        })
+
+        setMembers(flatMembers)
+        setTeamOrder(orderedTeamNames)
       } catch (err) {
         console.warn('Backend unreachable, using local team data:', err.message)
         setMembers(rawMembers.map(mapLocalMember))
+        setTeamOrder([
+          "Technical Team",
+          "Content and Research Team",
+          "Design Team",
+          "Event Management",
+          "Outreach"
+        ])
       } finally {
         setLoading(false)
       }
@@ -92,5 +137,5 @@ export const useTeam = () => {
     loadTeam()
   }, [])
 
-  return { members, loading, error }
+  return { members, teamOrder, loading, error }
 }
